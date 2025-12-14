@@ -74,4 +74,14 @@ void printDualColumnLine(const std::string &leftText, bool highlightLeft,
   std::cout << " |\n";
 }
 
+std::string currentDate() {
+  using namespace std::chrono;
+  auto now = system_clock::now();
+  std::time_t t = system_clock::to_time_t(now);
+  std::tm tm = *std::localtime(&t);
+  std::ostringstream oss;
+  oss << std::put_time(&tm, "%m/%d/%Y");
+  return oss.str();
+}
+
 } // namespace menu

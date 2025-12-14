@@ -1,6 +1,9 @@
 #ifndef CASHIER_H
 #define CASHIER_H
 
-void cashier();
+#include "booktype.h"
+#include "orderedLinkedList.h"
+
+void cashier(OrderedLinkedList<bookType*>& inventory);
 
 #endif

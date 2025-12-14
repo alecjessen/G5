@@ -1,12 +1,27 @@
+/*
+  CS1B – Serendipity (Final)
+  Partner A: Zee Richmond (1244256)
+  Partner B: Alexander Jessen (A00186160)
+  Date: 2025-12-12
+  Purpose: Inventory database menus (lookup/add/edit/delete) using ordered list.
+  Build: g++ -std=c++20 mainmenu.cpp cashier.cpp invmenu.cpp reports.cpp
+         booktype.cpp bookinfo.cpp menuutils.cpp -o serendipity
+*/
+
 #include "booktype.h"
+#include <algorithm>
+#include <cctype>
 #include <utility>
 
-int bookType::bookCount = 0;
+std::size_t bookType::num_recs = 0;
+int bookType::sortCode = 0;
+
+std::size_t bookType::recordCount() { return num_recs; }
 
 bookType::bookType()
     : isbn(""), bookTitle(""), author(""), publisher(""), dateAdded(""),
       qtyOnHand(0), wholesale(0.0f), retail(0.0f) {
-  ++bookCount;
+  ++num_recs;
 }
 
 bookType::bookType(const std::string &isbnValue, const std::string &titleValue,
@@ -17,7 +32,7 @@ bookType::bookType(const std::string &isbnValue, const std::string &titleValue,
     : isbn(isbnValue), bookTitle(titleValue), author(authorValue),
       publisher(publisherValue), dateAdded(dateAddedValue), qtyOnHand(qtyValue),
       wholesale(wholesaleValue), retail(retailValue) {
-  ++bookCount;
+  ++num_recs;
 }
 
 bookType::bookType(const bookType &other)
@@ -25,7 +40,7 @@ bookType::bookType(const bookType &other)
       publisher(other.publisher), dateAdded(other.dateAdded),
       qtyOnHand(other.qtyOnHand), wholesale(other.wholesale),
       retail(other.retail) {
-  ++bookCount;
+  ++num_recs;
 }
 
 bookType::bookType(bookType &&other) noexcept
@@ -33,10 +48,76 @@ bookType::bookType(bookType &&other) noexcept
       author(std::move(other.author)), publisher(std::move(other.publisher)),
       dateAdded(std::move(other.dateAdded)), qtyOnHand(other.qtyOnHand),
       wholesale(other.wholesale), retail(other.retail) {
-  ++bookCount;
+  ++num_recs;
 }
 
-bookType::~bookType() { --bookCount; }
+bookType::~bookType() { --num_recs; }
+
+static std::string toLower(std::string s) {
+  std::transform(s.begin(), s.end(), s.begin(),
+                 [](unsigned char c) { return std::tolower(c); });
+  return s;
+}
+
+bool bookType::operator<(const bookType &other) const {
+  switch (sortCode) {
+  case 0:
+    return toLower(bookTitle) < toLower(other.bookTitle);
+  case 1:
+    return toLower(isbn) < toLower(other.isbn);
+  case 2:
+    return toLower(author) < toLower(other.author);
+  case 3:
+    return toLower(publisher) < toLower(other.publisher);
+  case 4:
+    return dateAdded < other.dateAdded; // Simple string comparison for date
+  case 5:
+    return qtyOnHand < other.qtyOnHand;
+  case 6:
+    return wholesale < other.wholesale;
+  case 7:
+    return retail < other.retail;
+  default:
+    return toLower(bookTitle) < toLower(other.bookTitle);
+  }
+}
+
+bool bookType::operator>(const bookType &other) const { return other < *this; }
+
+bool bookType::operator<=(const bookType &other) const {
+  return !(*this > other);
+}
+
+bool bookType::operator>=(const bookType &other) const {
+  return !(*this < other);
+}
+
+bool bookType::operator==(const bookType &other) const {
+  switch (sortCode) {
+  case 0:
+    return toLower(bookTitle) == toLower(other.bookTitle);
+  case 1:
+    return toLower(isbn) == toLower(other.isbn);
+  case 2:
+    return toLower(author) == toLower(other.author);
+  case 3:
+    return toLower(publisher) == toLower(other.publisher);
+  case 4:
+    return dateAdded == other.dateAdded;
+  case 5:
+    return qtyOnHand == other.qtyOnHand;
+  case 6:
+    return wholesale == other.wholesale;
+  case 7:
+    return retail == other.retail;
+  default:
+    return toLower(bookTitle) == toLower(other.bookTitle);
+  }
+}
+
+bool bookType::operator!=(const bookType &other) const {
+  return !(*this == other);
+}
 
 void bookType::setISBN(const std::string &value) { isbn = value; }
 void bookType::setTitle(const std::string &value) { bookTitle = value; }
@@ -55,5 +136,3 @@ std::string bookType::getDateAdded() const { return dateAdded; }
 int bookType::getQtyOnHand() const { return qtyOnHand; }
 float bookType::getWholesale() const { return wholesale; }
 float bookType::getRetail() const { return retail; }
-
-int bookType::getBookCount() { return bookCount; }

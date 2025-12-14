@@ -1,11 +1,17 @@
 #ifndef INVMENU_H
 #define INVMENU_H
 
-void invMenu();
+#include "booktype.h"
+#include "orderedLinkedList.h"
 
-int lookUpBook(bool selectionMode = false);
-void addBook();
-void editBook();
-void deleteBook();
+void invMenu(OrderedLinkedList<bookType*>& inventory);
+
+bookType* lookUpBook(OrderedLinkedList<bookType*>& inventory, bool selectionMode = false);
+int lookUpBookHopCount(OrderedLinkedList<bookType*>& inventory);
+Node<bookType*>* lookUpBookNodePtr(OrderedLinkedList<bookType*>& inventory);
+
+void addBook(OrderedLinkedList<bookType*>& inventory);
+void editBook(OrderedLinkedList<bookType*>& inventory);
+void deleteBook(OrderedLinkedList<bookType*>& inventory);
 
 #endif

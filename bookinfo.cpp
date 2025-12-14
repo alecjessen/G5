@@ -1,3 +1,13 @@
+/*
+  CS1B – Serendipity (Final)
+  Partner A: Zee Richmond (1244256)
+  Partner B: Alexander Jessen (A00186160)
+  Date: 2025-12-12
+  Purpose: Inventory database menus (lookup/add/edit/delete) using ordered list.
+  Build: g++ -std=c++20 mainmenu.cpp cashier.cpp invmenu.cpp reports.cpp
+         booktype.cpp bookinfo.cpp menuutils.cpp -o serendipity
+*/
+
 #include "bookinfo.h"
 #include "menuutils.h"
 #include <algorithm>
@@ -27,8 +37,10 @@ string buildFieldLine(const string &label, const string &value,
 void bookInfo(const bookType &book) {
   constexpr int labelWidth = 16;
   vector<pair<string, string>> fields = {
-      {"Title", book.getTitle()},         {"ISBN", book.getISBN()},
-      {"Author", book.getAuthor()},       {"Publisher", book.getPub()},
+      {"Title", book.getTitle()},
+      {"ISBN", book.getISBN()},
+      {"Author", book.getAuthor()},
+      {"Publisher", book.getPub()},
       {"Date Added", book.getDateAdded()},
       {"Quantity", to_string(book.getQtyOnHand())},
       {"Wholesale", moneyString(book.getWholesale())},
