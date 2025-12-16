@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['build_20run_20notes_0',['Build &amp;amp; Run Notes',['../index.html#autotoc_md6',1,'']]]
+  ['cs1b_20–_20serendipity_20final_0',['CS1B – Serendipity (Final)',['../index.html',1,'']]]
 ];

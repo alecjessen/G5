@@ -88,15 +88,10 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
   while (true) {
       renderCashierScreen(date, count);
       cout << "--- Add Book to Receipt ---\n";
-      // Use lookUpBook to find book
-      // Note: lookUpBook returns a bookType pointer.
-      // We need to find its "index" in the list to store in our "integer array"
-      // or we can store the pointer casted to long long if identifiers are loose.
-      // But let's stick to indices for strict compliance if possible,
-      // or better: let's ask the user to select the book via lookUpBook,
-      // then we find its index.
+      // Use lookUpBook to find the node, then extract the book pointer and its index.
 
-      bookType* selectedBook = lookUpBook(inventory, true); // Selection mode = true
+      Node<bookType*>* selectedNode = lookUpBook(inventory, true); // Selection mode = true
+      bookType* selectedBook = selectedNode ? selectedNode->data : nullptr;
 
       if (selectedBook == nullptr) {
           if (count > 0) {

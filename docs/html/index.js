@@ -5,5 +5,5 @@ var index =
     [ "Project Description", "index.html#autotoc_md3", null ],
     [ "Key Features", "index.html#autotoc_md4", null ],
     [ "Demo Pointers", "index.html#autotoc_md5", null ],
-    [ "Build &amp; Run Notes", "index.html#autotoc_md6", null ]
+    [ "Build & Run Notes", "index.html#autotoc_md6", null ]
 ];

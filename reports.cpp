@@ -310,16 +310,19 @@ void repRetail(OrderedLinkedList<bookType *> &inventory) {
 }
 
 void repQty(OrderedLinkedList<bookType *> &inventory) {
+  (void)inventory;
   cout << "\n(Listing by Quantity is not available.\n";
   waitForEnter();
 }
 
 void repCost(OrderedLinkedList<bookType *> &inventory) {
+  (void)inventory;
   cout << "\n(Listing by Cost not fully implemented)\n";
   waitForEnter();
 }
 
 void repAge(OrderedLinkedList<bookType *> &inventory) {
+  (void)inventory;
   cout << "\n(Listing by Age not fully implemented)\n";
   waitForEnter();
 }

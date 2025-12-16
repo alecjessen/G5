@@ -4,14 +4,17 @@
 #include "booktype.h"
 #include "orderedLinkedList.h"
 
-void invMenu(OrderedLinkedList<bookType*>& inventory);
+void invMenu(OrderedLinkedList<bookType *> &inventory);
 
-bookType* lookUpBook(OrderedLinkedList<bookType*>& inventory, bool selectionMode = false);
-int lookUpBookHopCount(OrderedLinkedList<bookType*>& inventory);
-Node<bookType*>* lookUpBookNodePtr(OrderedLinkedList<bookType*>& inventory);
+// When selectionMode is true, returns the node containing the selected book;
+// otherwise performs a lookup UI and returns nullptr.
+Node<bookType *> *lookUpBook(OrderedLinkedList<bookType *> &inventory,
+                             bool selectionMode = false);
+int lookUpBookHopCount(OrderedLinkedList<bookType *> &inventory);
+Node<bookType *> *lookUpBookNodePtr(OrderedLinkedList<bookType *> &inventory);
 
-void addBook(OrderedLinkedList<bookType*>& inventory);
-void editBook(OrderedLinkedList<bookType*>& inventory);
-void deleteBook(OrderedLinkedList<bookType*>& inventory);
+void addBook(OrderedLinkedList<bookType *> &inventory);
+void editBook(OrderedLinkedList<bookType *> &inventory);
+void deleteBook(OrderedLinkedList<bookType *> &inventory);
 
 #endif

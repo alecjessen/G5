@@ -475,6 +475,26 @@ void showNoMatches(const string &query) {
   cin.get();
 }
 
+// Locate the node that holds the given book pointer; optionally return hop
+// count.
+Node<bookType *> *findNodeForBook(OrderedLinkedList<bookType *> &inventory,
+                                  bookType *target, int *hopCount = nullptr) {
+  Node<bookType *> *node = inventory.headPtr();
+  int hops = 0;
+  while (node) {
+    if (node->data == target) {
+      if (hopCount)
+        *hopCount = hops;
+      return node;
+    }
+    node = node->next;
+    ++hops;
+  }
+  if (hopCount)
+    *hopCount = -1;
+  return nullptr;
+}
+
 // Returns pointer to selected book or nullptr
 bookType *displaySearchResults(const vector<bookType *> &matches,
                                const string &query, bool selectionMode) {
@@ -565,8 +585,8 @@ bookType *performSearch(OrderedLinkedList<bookType *> &inventory,
 
 } // namespace
 
-bookType *lookUpBook(OrderedLinkedList<bookType *> &inventory,
-                     bool selectionMode) {
+Node<bookType *> *lookUpBook(OrderedLinkedList<bookType *> &inventory,
+                             bool selectionMode) {
   if (inventory.isEmpty()) {
     constexpr int innerWidth = 58;
     menu::clearScreen();
@@ -591,7 +611,7 @@ bookType *lookUpBook(OrderedLinkedList<bookType *> &inventory,
     case 1: {
       bookType *result = performSearch(inventory, selectionMode);
       if (selectionMode && result != nullptr) {
-        return result;
+        return findNodeForBook(inventory, result);
       }
       break;
     }
@@ -603,35 +623,22 @@ bookType *lookUpBook(OrderedLinkedList<bookType *> &inventory,
 
 // Return hop count from head to selected node; -1 if no selection or not found.
 int lookUpBookHopCount(OrderedLinkedList<bookType *> &inventory) {
-  bookType *selected = lookUpBook(inventory, true);
-  if (!selected)
+  Node<bookType *> *selectedNode = lookUpBook(inventory, true);
+  if (!selectedNode)
     return -1;
 
   Node<bookType *> *node = inventory.headPtr();
   int hops = 0;
-  while (node) {
-    if (node->data == selected) {
-      return hops;
-    }
+  while (node && node != selectedNode) {
     node = node->next;
     ++hops;
   }
-  return -1;
+  return node ? hops : -1;
 }
 
 // Return the node pointer for the selected book; nullptr if none chosen.
 Node<bookType *> *lookUpBookNodePtr(OrderedLinkedList<bookType *> &inventory) {
-  bookType *selected = lookUpBook(inventory, true);
-  if (!selected)
-    return nullptr;
-
-  Node<bookType *> *node = inventory.headPtr();
-  while (node) {
-    if (node->data == selected)
-      return node;
-    node = node->next;
-  }
-  return nullptr;
+  return lookUpBook(inventory, true);
 }
 
 void addBook(OrderedLinkedList<bookType *> &inventory) {
@@ -641,7 +648,7 @@ void addBook(OrderedLinkedList<bookType *> &inventory) {
   string footer = defaultFooter;
 
   while (true) {
-    if (inventory.size() >= kMaxBooks) {
+    if (inventory.size() >= static_cast<int>(kMaxBooks)) {
       DraftBook empty;
       renderAddBookScreen(empty, 0,
                           "Database is full. Press ENTER to return...");
@@ -729,7 +736,7 @@ void addBook(OrderedLinkedList<bookType *> &inventory) {
     case 9:
       renderAddBookScreen(draft, highlight,
                           "Attempting to save book to database...");
-      if (inventory.size() >= kMaxBooks) {
+      if (inventory.size() >= static_cast<int>(kMaxBooks)) {
         renderAddBookScreen(draft, highlight,
                             "Unable to save. Database already full.");
         waitForEnter();
@@ -776,7 +783,8 @@ void editBook(OrderedLinkedList<bookType *> &inventory) {
   }
 
   while (true) {
-    bookType *book = lookUpBook(inventory, true);
+    Node<bookType *> *bookNode = lookUpBook(inventory, true);
+    bookType *book = bookNode ? bookNode->data : nullptr;
     if (book == nullptr) {
       cout << "\nNo book selected.\n";
       if (!promptYesNo("Edit another? (y/n): "))
@@ -910,7 +918,8 @@ void deleteBook(OrderedLinkedList<bookType *> &inventory) {
       return;
     }
 
-    bookType *book = lookUpBook(inventory, true);
+    Node<bookType *> *bookNode = lookUpBook(inventory, true);
+    bookType *book = bookNode ? bookNode->data : nullptr;
     if (book == nullptr) {
       cout << "\nNo book selected.\n";
       if (!promptYesNo("Delete another? (y/n): "))
