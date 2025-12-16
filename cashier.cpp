@@ -92,7 +92,7 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
       // Note: lookUpBook returns a bookType pointer.
       // We need to find its "index" in the list to store in our "integer array"
       // or we can store the pointer casted to long long if identifiers are loose.
-      // But let's stick to indices for strict compliance if possible, 
+      // But let's stick to indices for strict compliance if possible,
       // or better: let's ask the user to select the book via lookUpBook,
       // then we find its index.
 
