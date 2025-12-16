@@ -10,6 +10,6 @@ var searchData=
   ['operator_3d_3d_7',['operator==',['../classbookType.html#ada855788096fd98e68f680d98702afdb',1,'bookType::operator==()'],['../classOrderedLinkedList_1_1Iterator.html#ada699bc32fcb08a16b1fd0916da1ca7a',1,'OrderedLinkedList::Iterator::operator==()']]],
   ['operator_3e_8',['operator&gt;',['../classbookType.html#a5e3f213bd9cfd5f9403d98d790793f91',1,'bookType']]],
   ['operator_3e_3d_9',['operator&gt;=',['../classbookType.html#a7694545e04ad9b977f35c30203fbc700',1,'bookType']]],
-  ['orderedlinkedlist_10',['orderedlinkedlist',['../classOrderedLinkedList.html',1,'OrderedLinkedList&lt; T &gt;'],['../classOrderedLinkedList.html#a16a75cd2eb9f4eb66527cf180fa84bf3',1,'OrderedLinkedList::OrderedLinkedList()']]],
+  ['orderedlinkedlist_10',['OrderedLinkedList',['../classOrderedLinkedList.html',1,'OrderedLinkedList&lt; T &gt;'],['../classOrderedLinkedList.html#a16a75cd2eb9f4eb66527cf180fa84bf3',1,'OrderedLinkedList::OrderedLinkedList()']]],
   ['orderedlinkedlist_2eh_11',['orderedLinkedList.h',['../orderedLinkedList_8h.html',1,'']]]
 ];

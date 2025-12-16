@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['flushline_0',['flushline',['../cashier_8cpp.html#ad09a122ae5c6af17979f9b3d52e4f8d6',1,'flushLine():&#160;cashier.cpp'],['../invmenu_8cpp.html#ad09a122ae5c6af17979f9b3d52e4f8d6',1,'flushLine():&#160;invmenu.cpp']]],
-  ['formatmoney_1',['formatmoney',['../cashier_8cpp.html#afa0a6aa0c44938bf209993cecd63d178',1,'formatMoney(double value):&#160;cashier.cpp'],['../reports_8cpp.html#afa0a6aa0c44938bf209993cecd63d178',1,'formatMoney(double value):&#160;reports.cpp']]]
+  ['flushline_0',['flushLine',['../cashier_8cpp.html#ad09a122ae5c6af17979f9b3d52e4f8d6',1,'flushLine():&#160;cashier.cpp'],['../invmenu_8cpp.html#ad09a122ae5c6af17979f9b3d52e4f8d6',1,'flushLine():&#160;invmenu.cpp']]],
+  ['formatmoney_1',['formatMoney',['../cashier_8cpp.html#afa0a6aa0c44938bf209993cecd63d178',1,'formatMoney(double value):&#160;cashier.cpp'],['../reports_8cpp.html#afa0a6aa0c44938bf209993cecd63d178',1,'formatMoney(double value):&#160;reports.cpp']]]
 ];
