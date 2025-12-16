@@ -95,9 +95,9 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
       // But let's stick to indices for strict compliance if possible, 
       // or better: let's ask the user to select the book via lookUpBook,
       // then we find its index.
-      
+
       bookType* selectedBook = lookUpBook(inventory, true); // Selection mode = true
-      
+
       if (selectedBook == nullptr) {
           if (count > 0) {
               cout << "\nFinished adding books.\n";
@@ -122,7 +122,7 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
           }
           index++;
       }
-      
+
       if (!foundIndex) {
           // Should not happen if lookUpBook works correctly
           cout << "Error locating book in inventory.\n";
@@ -171,11 +171,11 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
           purchaseQtys = newQtys;
           capacity = newCap;
       }
-      
+
       bookIndices[count] = index;
       purchaseQtys[count] = qtyNeeded;
       count++;
-      
+
       cout << "\nBook added to cart.\n";
       if (!promptYesNo("Add another book? (y/n): ")) {
           break;
@@ -186,7 +186,7 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
   menu::clearScreen();
   cout << "Serendipity Booksellers\n";
   cout << "Date: " << date << "\n\n";
-  
+
   cout << left << setw(4) << "Qty" << setw(14) << "ISBN" << setw(26) << "Title" 
        << right << setw(10) << "Price" << setw(10) << "Total" << endl;
   cout << string(64, '-') << endl;
@@ -196,7 +196,7 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
   for (int i = 0; i < count; ++i) {
       int idx = bookIndices[i];
       int qty = purchaseQtys[i];
-      
+
       bookType* book = inventory.getAt(idx);
       if (!book) continue; // Should not happen
 
@@ -207,17 +207,17 @@ void cashier(OrderedLinkedList<bookType*>& inventory) {
       string title = book->getTitle();
       if (title.length() > 25) title = title.substr(0, 22) + "...";
 
-      cout << left << setw(4) << qty 
-           << setw(14) << book->getISBN() 
+      cout << left << setw(4) << qty
+           << setw(14) << book->getISBN()
            << setw(26) << title
-           << right << setw(10) << formatMoney(price) 
+           << right << setw(10) << formatMoney(price)
            << setw(10) << formatMoney(lineTotal) << endl;
   }
-  
+
   cout << endl;
   double tax = subtotal * 0.06;
   double total = subtotal + tax;
-  
+
   cout << setw(54) << "Subtotal: " << setw(10) << formatMoney(subtotal) << endl;
   cout << setw(54) << "Tax: " << setw(10) << formatMoney(tax) << endl;
   cout << setw(54) << "Total: " << setw(10) << formatMoney(total) << endl;
