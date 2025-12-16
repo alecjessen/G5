@@ -42,7 +42,7 @@ public:
   // If T is a pointer type, we compare the dereferenced values.
   void insert(const T &item) {
     Node<T> *newNode = new Node<T>(item);
-    
+
     // Case 1: Empty list or item smaller than head
     if (head == nullptr || compare(item, head->data) < 0) {
       newNode->next = head;
@@ -93,15 +93,15 @@ public:
 
     return false;
   }
-  
+
   // Remove node at specific index (0-based)
   // Returns the data removed
   T removeAt(int index) {
       if (index < 0 || index >= count) return T{};
-      
+
       Node<T>* current = head;
       Node<T>* previous = nullptr;
-      
+
       if (index == 0) {
           head = head->next;
           T data = current->data;
@@ -109,12 +109,12 @@ public:
           count--;
           return data;
       }
-      
+
       for (int i = 0; i < index; i++) {
           previous = current;
           current = current->next;
       }
-      
+
       previous->next = current->next;
       T data = current->data;
       delete current;
@@ -125,14 +125,14 @@ public:
   // Get item at index (0-based)
   // Returns T (copy or pointer)
   T getAt(int index) const {
-    if (index < 0 || index >= count) return T{}; 
+    if (index < 0 || index >= count) return T{};
     Node<T> *current = head;
     for (int i = 0; i < index; ++i) {
       current = current->next;
     }
     return current->data;
   }
-  
+
   // Look up item. Returns pointer to Node if found, or nullptr.
   // This supports the "return pointer to node" requirement.
   Node<T>* search(const T &item) const {
@@ -148,7 +148,7 @@ public:
 
   int size() const { return count; }
   bool isEmpty() const { return count == 0; }
-  
+
   // Basic iterator support
   class Iterator {
       Node<T>* current;
@@ -163,7 +163,7 @@ public:
       bool operator!=(const Iterator& other) const { return current != other.current; }
       bool operator==(const Iterator& other) const { return current == other.current; }
   };
-  
+
   Iterator begin() const { return Iterator(head); }
   Iterator end() const { return Iterator(nullptr); }
 
